@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tikbe Kina — টিকবে কি না</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Hind+Siliguri:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+
+      /* Romantic Blush & Rose Palette (Light Mode) */
+      --bg: #fdf4f6;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #ffe6ec 0%, #fdf4f6 65%, #f9eaee 100%);
+      --surface: #ffffff;
+      --fg: #2c1018;
+      --muted: #7a4c59;
+      --line: #f0cfd8;
+      --housing: #240c14;
+      --housing-edge: #421927;
+      --go: #d91e5b;
+      --go-glow: #ff4d88;
+      --stop: #6b4c5e;
+      --stop-glow: #a87b96;
+      --lamp-off-go: #451829;
+      --lamp-off-stop: #30202b;
+      --accent: #e11d48;
+      --btn-bg: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+      --btn-fg: #ffffff;
+      --card-shadow: 0 12px 32px -8px rgba(190, 18, 60, 0.12);
+
+      --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+      --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --font-bn: "Hind Siliguri", "Noto Sans Bengali", "Nirmala UI", sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #14080d;
+        --bg-gradient: radial-gradient(circle at 50% 0%, #290e19 0%, #14080d 70%, #0e0509 100%);
+        --surface: #1f0d14;
+        --fg: #fce8ee;
+        --muted: #b88a98;
+        --line: #3d1c28;
+        --housing: #0d0408;
+        --housing-edge: #381824;
+        --go: #ff5c93;
+        --go-glow: #ff3b7f;
+        --stop: #a38296;
+        --stop-glow: #c49bb4;
+        --lamp-off-go: #361220;
+        --lamp-off-stop: #241820;
+        --accent: #ff5c93;
+        --btn-bg: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+        --btn-fg: #ffffff;
+        --card-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #14080d;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #290e19 0%, #14080d 70%, #0e0509 100%);
+      --surface: #1f0d14;
+      --fg: #fce8ee;
+      --muted: #b88a98;
+      --line: #3d1c28;
+      --housing: #0d0408;
+      --housing-edge: #381824;
+      --go: #ff5c93;
+      --go-glow: #ff3b7f;
+      --stop: #a38296;
+      --stop-glow: #c49bb4;
+      --lamp-off-go: #361220;
+      --lamp-off-stop: #241820;
+      --accent: #ff5c93;
+      --btn-bg: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+      --btn-fg: #ffffff;
+      --card-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+      color-scheme: dark;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      background: var(--bg);
+      background-image: var(--bg-gradient);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+      padding-block: 36px 56px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    [hidden]:not([hidden="until-found" i]) {
+      display: none !important;
+    }
+
+    .wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header styling with romantic accent */
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 9vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.025em;
+      margin: 0;
+      text-wrap: balance;
+      background: linear-gradient(135deg, var(--fg) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-heart {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      line-height: 1;
+      animation: gentlePulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.14); }
+    }
+
+    .bn {
+      font-family: var(--font-bn);
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* Form card */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: var(--surface);
+      padding: 22px;
+      border-radius: 20px;
+      border: 1.5px solid var(--line);
+      box-shadow: var(--card-shadow);
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+    }
+
+    input[type="text"] {
+      font: inherit;
+      font-size: 1.1rem;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--fg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]::placeholder {
+      color: var(--muted);
+      opacity: 0.65;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    input:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    button {
+      font: inherit;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--btn-bg);
+      color: var(--btn-fg);
+      cursor: pointer;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px -4px rgba(225, 29, 72, 0.45);
+      transition: transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 8px 22px -4px rgba(225, 29, 72, 0.6);
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    /* Romantic Signal Housing */
+    .signal {
+      background: var(--housing);
+      border: 2px solid var(--housing-edge);
+      border-radius: 26px;
+      padding: 26px 20px 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      box-shadow: 0 18px 40px -12px rgba(20, 6, 12, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .lamp-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .lamp {
+      width: min(100%, 134px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 3px solid var(--housing-edge);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .lamp svg {
+      width: 48%;
+      height: 48%;
+      opacity: 0.22;
+      transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .lamp.stop {
+      background: var(--lamp-off-stop);
+      color: #d8b4c8;
+    }
+
+    .lamp.go {
+      background: var(--lamp-off-go);
+      color: #ffd1e0;
+    }
+
+    /* Lit states */
+    .lamp.stop.on {
+      background: radial-gradient(circle at 36% 32%, #d8b4c8 0%, #8b5d78 42%, #4a2c3e 100%);
+      border-color: #c49bb4;
+      box-shadow: 0 0 36px 8px color-mix(in srgb, var(--stop-glow) 55%, transparent);
+      transform: scale(1.03);
+    }
+
+    .lamp.stop.on svg {
+      opacity: 0.95;
+      color: #ffffff;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    }
+
+    .lamp.go.on {
+      background: radial-gradient(circle at 36% 32%, #ffc2d6 0%, var(--go-glow) 42%, #b8144a 100%);
+      border-color: #ff8fb3;
+      box-shadow: 0 0 42px 12px color-mix(in srgb, var(--go-glow) 65%, transparent);
+      transform: scale(1.04);
+    }
+
+    .lamp.go.on svg {
+      opacity: 1;
+      color: #ffffff;
+      transform: scale(1.08);
+      filter: drop-shadow(0 2px 10px rgba(184, 20, 74, 0.6));
+    }
+
+    .lamp-label {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8f6b7b;
+      transition: color 0.25s ease;
+    }
+
+    .lamp-label.lit {
+      color: #fff0f5;
+      font-weight: 700;
+    }
+
+    /* Verdict readout */
+    .verdict {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0 4px;
+    }
+
+    .verdict-word {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.1rem, 8vw, 2.9rem);
+      line-height: 1.05;
+      margin: 0;
+      transition: color 0.25s ease;
+    }
+
+    .verdict-word.go {
+      color: var(--go);
+    }
+
+    .verdict-word.stop {
+      color: var(--stop);
+    }
+
+    .verdict-word.idle {
+      color: var(--muted);
+    }
+
+    /* Testing flicker animation */
+    .lamp.testing.stop,
+    .lamp.testing.go {
+      animation: flick 0.18s steps(2) 4;
+    }
+
+    @keyframes flick {
+      50% {
+        filter: brightness(2.1);
+      }
+    }
+
+    /* Floating Particle Layer */
+    .particle-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 50;
+    }
+
+    .particle {
+      position: absolute;
+      user-select: none;
+      will-change: transform, opacity;
+      line-height: 1;
+    }
+
+    /* Rising full hearts for Tikbe */
+    @keyframes floatUpHeart {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.55) rotate(0deg);
+        opacity: 0;
+      }
+      12% {
+        opacity: 0.95;
+      }
+      50% {
+        transform: translate3d(var(--sway, 24px), -50vh, 0) scale(1.05) rotate(var(--rot, 12deg));
+      }
+      85% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: translate3d(calc(var(--sway, 24px) * -0.7), -112vh, 0) scale(1.15) rotate(calc(var(--rot, 12deg) * -1));
+        opacity: 0;
+      }
+    }
+
+    /* Drifting broken hearts for Tikbe na */
+    @keyframes driftBrokenHeart {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.75) rotate(0deg);
+        opacity: 0;
+      }
+      12% {
+        opacity: 0.9;
+      }
+      50% {
+        transform: translate3d(var(--sway, -22px), 48vh, 0) scale(1) rotate(var(--rot, -18deg));
+      }
+      85% {
+        opacity: 0.75;
+      }
+      100% {
+        transform: translate3d(calc(var(--sway, -22px) * -0.8), 112vh, 0) scale(0.9) rotate(calc(var(--rot, -18deg) * 1.4));
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lamp,
+      .lamp svg,
+      .title-heart {
+        transition: none;
+        animation: none;
+      }
+      .lamp.testing.stop,
+      .lamp.testing.go {
+        animation: none;
+      }
+      .particle-layer {
+        display: none;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .fields {
+        grid-template-columns: 1fr;
+      }
+      form {
+        padding: 18px;
+      }
+      .signal {
+        padding: 20px 14px 16px;
+      }
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Container for floating hearts / broken hearts -->
+  <div class="particle-layer" id="particleLayer" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="title-row">
+        <h1>Tikbe Kina</h1>
+        <span class="title-heart" aria-hidden="true">💖</span>
+      </div>
+      <span class="bn">টিকবে কি না</span>
+    </header>
+
+    <form id="form" autocomplete="off">
+      <div class="fields">
+        <div class="field">
+          <label for="name1">First name</label>
+          <input type="text" id="name1" placeholder="Type name" maxlength="40">
+        </div>
+        <div class="field">
+          <label for="name2">Second name</label>
+          <input type="text" id="name2" placeholder="Type name" maxlength="40">
+        </div>
+      </div>
+      <button type="submit" id="go">
+        <span>Tikbe kina dekho</span>
+        <span aria-hidden="true">♥</span>
+      </button>
+    </form>
+
+    <section aria-label="Signal">
+      <div class="signal">
+        <div class="lamp-cell">
+          <div class="lamp stop" id="lampStop">
+            <!-- Broken heart icon inside lamp -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-3.2 10.6l-2.1-2.6 2.5-3.2-1.4-2.5 1.8.8 1.5 2.7-2.4 3.1 1.9 2.3-1.8-.6z"/>
+            </svg>
+          </div>
+          <div class="lamp-label" id="lblStop">Tikbe na</div>
+        </div>
+        <div class="lamp-cell">
+          <div class="lamp go" id="lampGo">
+            <!-- Full heart icon inside lamp -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <div class="lamp-label" id="lblGo">Tikbe</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="verdict" aria-live="polite">
+      <p class="verdict-word idle" id="verdictWord">Enter two names</p>
+    </div>
+  </div>
+
+  <script>
+    var form = document.getElementById("form");
+    var n1 = document.getElementById("name1");
+    var n2 = document.getElementById("name2");
+    var lampStop = document.getElementById("lampStop");
+    var lampGo = document.getElementById("lampGo");
+    var lblStop = document.getElementById("lblStop");
+    var lblGo = document.getElementById("lblGo");
+    var vWord = document.getElementById("verdictWord");
+    var particleLayer = document.getElementById("particleLayer");
+    var timer = null;
+    var spawnTimers = [];
+
+    function analyse(name) {
+      var chars = Array.from(name.toUpperCase()).filter(function (c) { return !/\s/.test(c); });
+      var codes = chars.map(function (c) { return c.codePointAt(0); });
+      var sum = codes.reduce(function (a, b) { return a + b; }, 0);
+      return { sum: sum };
+    }
+
+    function setLamps(state) {
+      lampStop.classList.toggle("on", state === "stop");
+      lampGo.classList.toggle("on", state === "go");
+      lblStop.classList.toggle("lit", state === "stop");
+      lblGo.classList.toggle("lit", state === "go");
+    }
+
+    function clearParticles() {
+      spawnTimers.forEach(function (id) { clearTimeout(id); });
+      spawnTimers = [];
+      if (particleLayer) {
+        particleLayer.innerHTML = "";
+      }
+    }
+
+    function spawnHeartFlow(isTikbe) {
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || !particleLayer) return;
+
+      clearParticles();
+
+      var loveSymbols = ["❤️", "💕", "💖", "💗", "💓"];
+      var brokenSymbols = ["💔", "🥀", "💔"];
+      var symbols = isTikbe ? loveSymbols : brokenSymbols;
+      var count = isTikbe ? 28 : 22;
+
+      for (var i = 0; i < count; i++) {
+        (function (index) {
+          var delay = index * 95 + Math.random() * 120;
+          var tId = setTimeout(function () {
+            var el = document.createElement("span");
+            el.className = "particle";
+            el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+            var leftPct = 4 + Math.random() * 92;
+            var sizePx = 18 + Math.floor(Math.random() * 18);
+            var durationSec = 2.6 + Math.random() * 1.6;
+            var swayPx = (Math.random() > 0.5 ? 1 : -1) * (18 + Math.floor(Math.random() * 34));
+            var rotDeg = (Math.random() > 0.5 ? 1 : -1) * (10 + Math.floor(Math.random() * 22));
+
+            el.style.left = leftPct + "vw";
+            el.style.fontSize = sizePx + "px";
+            el.style.setProperty("--sway", swayPx + "px");
+            el.style.setProperty("--rot", rotDeg + "deg");
+
+            if (isTikbe) {
+              el.style.bottom = "-40px";
+              el.style.animation = "floatUpHeart " + durationSec.toFixed(2) + "s ease-out forwards";
+            } else {
+              el.style.top = "-40px";
+              el.style.animation = "driftBrokenHeart " + durationSec.toFixed(2) + "s ease-in forwards";
+            }
+
+            particleLayer.appendChild(el);
+
+            el.addEventListener("animationend", function () {
+              if (el.parentNode) {
+                el.parentNode.removeChild(el);
+              }
+            });
+          }, delay);
+
+          spawnTimers.push(tId);
+        })(i);
+      }
+    }
+
+    function render(animate) {
+      var v1 = n1.value.trim();
+      var v2 = n2.value.trim();
+      if (!v1 || !v2) {
+        clearParticles();
+        setLamps(null);
+        vWord.className = "verdict-word idle";
+        vWord.textContent = "Enter two names";
+        return;
+      }
+      var a = analyse(v1);
+      var b = analyse(v2);
+      var halfA = Math.floor(a.sum / 2);
+      var halfB = Math.floor(b.sum / 2);
+      var total = halfA + halfB;
+      var even = total % 2 === 0;
+
+      function settle() {
+        lampStop.classList.remove("testing");
+        lampGo.classList.remove("testing");
+        setLamps(even ? "go" : "stop");
+        vWord.className = "verdict-word " + (even ? "go" : "stop");
+        vWord.textContent = even ? "Tikbe ♥" : "Tikbe na 💔";
+        if (animate) {
+          spawnHeartFlow(even);
+        }
+      }
+
+      clearTimeout(timer);
+      clearParticles();
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (animate && !reduce) {
+        setLamps(null);
+        vWord.className = "verdict-word idle";
+        vWord.textContent = "…";
+        lampStop.classList.add("testing");
+        lampGo.classList.add("testing");
+        timer = setTimeout(settle, 750);
+      } else {
+        settle();
+      }
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      render(true);
+    });
+
+    render(false);
+  </script>
+
+</body>
+</html>
